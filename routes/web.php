@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/login',[UserController::class,'index'])->name('login');
-Route::post('/login',[UserController::class,'login'])->name('signin');
+Route::get('/login',[RegisterController::class,'index'])->name('login');
+Route::post('/login',[RegisterController::class,'register'])->name('signin');
+Route::view('/home','home')->middleware('auth');
+Route::view('login','auth.login')->middleware('guest')->name('login');
+Route::post('authenticate',[LoginController::class,'authenticate']);
+Route::get('logout',[LoginController::class,'logout']);
