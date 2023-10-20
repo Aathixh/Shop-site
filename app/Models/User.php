@@ -22,7 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phn_num'=>nullable()
+        'phn_num'
     ];
 
     /**
